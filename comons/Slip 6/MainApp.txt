@@ -1,0 +1,16 @@
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        // Load the Spring configuration file
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+
+        // Retrieve the bean
+        HelloBeans hb = (HelloBeans) context.getBean("helloworld");
+
+        // Call the method
+        hb.getName();
+        hb.getCurrentDateTimeUsingDate();
+    }
+}

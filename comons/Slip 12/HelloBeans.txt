@@ -1,0 +1,14 @@
+public class HelloBeans
+{
+	private String name;
+	public void getName()
+	{
+		System.out.println("your message is:"+name);
+	}
+	
+	public void setName(String name)
+	{
+		this.name=name;
+	}
+
+}

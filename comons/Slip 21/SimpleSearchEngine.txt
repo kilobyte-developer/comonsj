@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.concurrent.*;
+
+class SearchTask implements Runnable {
+    private File file;
+    private String searchString;
+
+    public SearchTask(File file, String searchString) {
+        this.file = file;
+        this.searchString = searchString;
+    }
+
+    @Override
+    public void run() {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            int lineNumber = 0;
+            boolean found = false;
+
+            while ((line = br.readLine()) != null) {
+                lineNumber++;
+                if (line.contains(searchString)) {
+                    System.out.println("Found in " + file.getName() + " at line " + lineNumber + ": " + line);
+                    found = true;
+                }
+            }
+            
+            if (!found) {
+                System.out.println("No match found in " + file.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + file.getName());
+        }
+    }
+}
+
+public class SimpleSearchEngine {
+    public static void main(String[] args) {
+        // Get user input for search string
+        System.out.print("Enter the string to search: ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            String searchString = reader.readLine();
+            File currentDir = new File("."); // Current directory
+            File[] files = currentDir.listFiles((dir, name) -> name.endsWith(".txt"));
+
+            if (files == null || files.length == 0) {
+                System.out.println("No text files found in the current directory.");
+                return;
+            }
+
+            // Use ExecutorService for managing threads
+            ExecutorService executor = Executors.newFixedThreadPool(files.length);
+
+            for (File file : files) {
+                executor.execute(new SearchTask(file, searchString));
+            }
+
+            executor.shutdown();
+        } catch (IOException e) {
+            System.out.println("Error reading input.");
+        }
+    }
+}

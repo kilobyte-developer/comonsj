@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <form method="post" action="CookieDemo">
+<input type="radio" name="sub" value="Maths"> Maths <br>
+<input type="radio" name="sub" value="Physics"> Physics <br>    
+<input type="radio" name="sub" value="Chemistry"> Chemistry<br>
+<input type="radio" name="sub" value="Biology"> Biology <br>
+<input type="submit" value="Submit">
+</form>   
+<form method="get" action="CookieDemo">  
+<input type="submit" value="reset">
+</form>
+
+</body>
+</html>

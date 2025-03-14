@@ -1,0 +1,32 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/ServerInfo")
+public class ServerInfo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+   
+    public ServerInfo() {
+        super();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter pw = response.getWriter();
+
+        pw.println("<html><body><h2>Information about HTTP Request</h2>");
+        pw.println("<br>Server Name: " + request.getServerName());
+        pw.println("<br>Server Port: " + request.getServerPort());
+        pw.println("<br>IP Address: " + request.getRemoteAddr());
+        pw.println("<br>Client Browser: " + request.getHeader("User-Agent"));
+        pw.println("</body></html>");
+
+        pw.close();
+    }
+}

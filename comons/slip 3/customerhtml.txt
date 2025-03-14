@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Customer" method="GET">
+            Enter Customer No:<input type="text" name="t1">
+            <input type="submit" value="Submit">
+        </form>
+
+</body>
+</html>
